@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { parseGs1 } from '../utils/gs1'
+import BarcodeScanner from '../components/BarcodeScanner.vue'
 
 const gtin = ref('')
 const sn = ref('')
@@ -53,12 +54,38 @@ function handleManualPaste(evt) {
   const parsed = parseGs1(value)
   applyParsed(parsed)
 }
+
+function handleBarcodeDetected(barcode) {
+  console.log('Camera detected barcode:', barcode)
+  const parsed = parseGs1(barcode)
+  applyParsed(parsed)
+}
+
+function handleScannerError(error) {
+  console.error('Scanner error:', error)
+  // You could show a toast notification here
+}
 </script>
 
 <template>
   <main style="max-width: 800px; margin: 0 auto; padding: 2rem;">
     <h1 style="margin-bottom: 1rem;">Medication Input</h1>
-    <p style="margin-bottom: 1rem; color:#666;">Scan a GS1 DataMatrix barcode. Fields will auto-fill. You can also paste a raw GS1 string.</p>
+    <p style="margin-bottom: 1rem; color:#666;">Scan a GS1 DataMatrix barcode using your camera or keyboard scanner. Fields will auto-fill. You can also paste a raw GS1 string.</p>
+    
+    <!-- Camera Scanner Section -->
+    <div style="margin-bottom: 2rem;">
+      <h2 style="margin-bottom: 1rem; font-size: 1.25rem; color: #374151;">📷 Camera Scanner</h2>
+      <BarcodeScanner 
+        @barcode-detected="handleBarcodeDetected"
+        @error="handleScannerError"
+      />
+    </div>
+    
+    <!-- Divider -->
+    <div style="margin: 2rem 0; text-align: center; color: #9ca3af;">
+      <span style="background: white; padding: 0 1rem;">or use keyboard scanner below</span>
+      <hr style="margin-top: -0.5rem; border: none; border-top: 1px solid #e5e7eb;">
+    </div>
 
     <form style="display: grid; grid-template-columns: 1fr; gap: 1rem;">
       <label>
@@ -82,6 +109,15 @@ function handleManualPaste(evt) {
     <div style="margin-top: 1.25rem; display:flex; gap:.5rem; align-items:center; color:#6b7280; font-size:.9rem;">
       <span>Tip: paste GS1 string here to test →</span>
       <input type="text" @paste.prevent="handleManualPaste" placeholder=")d2... or (01)..." style="flex:1;" />
+    </div>
+    
+    <div style="margin-top: 1rem; padding: 1rem; background: #f3f4f6; border-radius: 6px; font-size: 0.875rem; color: #6b7280;">
+      <strong>Scanning Options:</strong>
+      <ul style="margin: 0.5rem 0 0 1rem; padding: 0;">
+        <li>📷 <strong>Camera:</strong> Click "Start Camera Scan" above to use your device camera</li>
+        <li>⌨️ <strong>Keyboard:</strong> Use a USB barcode scanner (auto-detects when you scan)</li>
+        <li>📋 <strong>Paste:</strong> Copy and paste a GS1 string in the field above</li>
+      </ul>
     </div>
 
     <div style="height:0; overflow:hidden;">

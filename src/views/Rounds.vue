@@ -2,6 +2,7 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { patients as seedPatients, savePatients } from '../data/patients'
 import { createScanBus } from '../utils/scanBus'
+import BarcodeScanner from '../components/BarcodeScanner.vue'
 
 const patients = ref(seedPatients)
 
@@ -81,6 +82,22 @@ function submitModal() {
   isModalOpen.value = false
 }
 
+function handleCameraBarcodeDetected(barcode) {
+  console.log('Camera detected barcode:', barcode)
+  const scanned = normalizeScan(barcode)
+  lastScanned.value = scanned
+  const scannedLower = scanned.toLowerCase()
+  const patient = patients.value.find(p => (p.barcode || '').toLowerCase() === scannedLower)
+  if (patient) {
+    openModalFor(patient)
+  }
+}
+
+function handleScannerError(error) {
+  console.error('Scanner error:', error)
+  // You could show a toast notification here
+}
+
 function handleKey(e) {
   if (isModalOpen.value) return // avoid capturing while in modal
   const targetTag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : ''
@@ -151,7 +168,22 @@ onBeforeUnmount(() => {
   <main style="max-width: 1100px; margin: 0 auto; padding: 2rem;">
     <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:1rem;">
       <h1>Rounds</h1>
-      <a href="/barcodes" target="_blank" rel="noopener" class="link">Open patient barcodes</a>
+      <a href="/barcode-prototype/barcodes" target="_blank" rel="noopener" class="link">Open patient barcodes</a>
+    </div>
+    
+    <!-- Camera Scanner Section -->
+    <div style="margin-bottom: 2rem;">
+      <h2 style="margin-bottom: 1rem; font-size: 1.25rem; color: #374151;">📷 Scan Patient Barcode</h2>
+      <BarcodeScanner 
+        @barcode-detected="handleCameraBarcodeDetected"
+        @error="handleScannerError"
+      />
+    </div>
+    
+    <!-- Divider -->
+    <div style="margin: 2rem 0; text-align: center; color: #9ca3af;">
+      <span style="background: white; padding: 0 1rem;">or use keyboard scanner below</span>
+      <hr style="margin-top: -0.5rem; border: none; border-top: 1px solid #e5e7eb;">
     </div>
     <div style="height:0; overflow:hidden; position:fixed; top:-10000px; left:-10000px;">
       <input ref="hiddenInput" type="text" aria-hidden="true" tabindex="-1" />
@@ -184,6 +216,15 @@ onBeforeUnmount(() => {
     <div style="margin-top: 1rem;">
       <RouterLink to="/">← Back to Landing</RouterLink>
       <span v-if="lastScanned" class="debug">Last scanned: {{ lastScanned }}</span>
+    </div>
+    
+    <div style="margin-top: 1rem; padding: 1rem; background: #f3f4f6; border-radius: 6px; font-size: 0.875rem; color: #6b7280;">
+      <strong>Scanning Options:</strong>
+      <ul style="margin: 0.5rem 0 0 1rem; padding: 0;">
+        <li>📷 <strong>Camera:</strong> Click "Start Camera Scan" above to scan patient barcodes with your device camera</li>
+        <li>⌨️ <strong>Keyboard:</strong> Use a USB barcode scanner (auto-detects when you scan)</li>
+        <li>🔄 <strong>Auto-Open:</strong> When a patient barcode is detected, the update modal will open automatically</li>
+      </ul>
     </div>
 
     <div v-if="isModalOpen" class="modal-backdrop" @click.self="isModalOpen=false">
