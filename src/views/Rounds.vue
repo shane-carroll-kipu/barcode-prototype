@@ -301,6 +301,29 @@ onBeforeUnmount(() => {
 .tr.stale { background:#fff7f7; }
 .tr.stale .since, .tr.stale .since-sub { color:#b91c1c; }
 
+@media (prefers-color-scheme: dark) {
+  .table { 
+    background:#1f2937; 
+    border-color:#374151; 
+  }
+  .thead { 
+    background:#374151; 
+    color:#e5e7eb; 
+  }
+  .th { 
+    border-bottom-color:#4b5563; 
+  }
+  .tbody .tr { 
+    border-bottom-color:#374151; 
+  }
+  .tr.stale { 
+    background:#7f1d1d; 
+  }
+  .tr.stale .since, .tr.stale .since-sub { 
+    color:#fca5a5; 
+  }
+}
+
 @media (max-width: 900px) {
   .thead { display: none; }
   .tr { grid-template-columns: 64px 1fr; grid-row-gap:.25rem; }
@@ -322,12 +345,43 @@ onBeforeUnmount(() => {
 .modal-patient { display:flex; gap:.75rem; align-items:center; }
 .form { display:grid; gap:.75rem; }
 .form label { display:grid; gap:.25rem; }
-.form select { padding:.5rem .6rem; border:1px solid #e5e7eb; border-radius:6px; }
+.form select { padding:.5rem .6rem; border:1px solid #e5e7eb; border-radius:6px; background:#fff; color:#111827; }
 .modal-footer { display:flex; gap:.5rem; justify-content:flex-end; padding: .75rem 1rem; border-top:1px solid #e5e7eb; }
 .btn { padding:.5rem .8rem; border:1px solid #6366f1; background:#6366f1; color:#fff; border-radius:6px; }
 .btn.btn-secondary { border-color:#d1d5db; background:#fff; color:#111827; }
-.close { border:none; background:transparent; font-size:1rem; cursor:pointer; }
+.close { border:none; background:transparent; font-size:1rem; cursor:pointer; color:#6b7280; }
 .btn-sm { padding:.35rem .6rem; border:1px solid #d1d5db; background:#fff; color:#111827; border-radius:6px; }
+
+@media (prefers-color-scheme: dark) {
+  .modal {
+    background: #1f2937;
+    border-color: #374151;
+  }
+  .modal-header {
+    border-bottom-color: #374151;
+  }
+  .modal-footer {
+    border-top-color: #374151;
+  }
+  .form select {
+    background: #374151;
+    border-color: #4b5563;
+    color: #f9fafb;
+  }
+  .btn.btn-secondary {
+    background: #374151;
+    border-color: #4b5563;
+    color: #f9fafb;
+  }
+  .btn-sm {
+    background: #374151;
+    border-color: #4b5563;
+    color: #f9fafb;
+  }
+  .close {
+    color: #9ca3af;
+  }
+}
 .debug { margin-left: .75rem; color:#6b7280; font-size:.85rem; }
 </style>
 

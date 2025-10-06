@@ -30,13 +30,25 @@
   background: #fff;
   color: #111827;
   text-decoration: none;
-  transition: box-shadow .2s ease, transform .1s ease;
+  transition: box-shadow .2s ease, transform .1s ease, border-color .2s ease;
   text-align: center;
 }
 .card:hover {
   box-shadow: 0 8px 25px rgba(0,0,0,0.12);
   transform: translateY(-2px);
   border-color: #646cff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: #1f2937;
+    border-color: #374151;
+    color: #f9fafb;
+  }
+  .card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    border-color: #818cf8;
+  }
 }
 </style>
 

@@ -139,11 +139,25 @@ input[type="text"] {
   padding: .5rem .625rem;
   border: 1px solid #e5e7eb;
   border-radius: 6px;
+  background: #fff;
+  color: #111827;
 }
 input[type="text"]:focus {
   outline: none;
   border-color: #646cff;
   box-shadow: 0 0 0 3px rgba(100,108,255,0.15);
+}
+
+@media (prefers-color-scheme: dark) {
+  input[type="text"] {
+    background: #374151;
+    border-color: #4b5563;
+    color: #f9fafb;
+  }
+  input[type="text"]:focus {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 3px rgba(129,140,248,0.15);
+  }
 }
 </style>
 
