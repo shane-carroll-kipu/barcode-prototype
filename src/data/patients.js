@@ -27,8 +27,16 @@ function randomPastMinutes(maxMinutes) {
 const activities = ['Sleeping', 'Eating', 'Watching TV', 'Reading', 'Walking', 'Group Therapy', 'Resting']
 const locations = ['Living Room', 'Group Room', 'Bedroom', 'Garden', 'Dining Hall', 'Nurse Station']
 
-function uid(prefix = 'PID') {
-  return `${prefix}-${Math.random().toString(36).slice(2, 10)}-${Date.now().toString(36)}`
+function uid(prefix = 'PID', index = 0) {
+  // Use a fixed seed based on index to ensure consistent barcodes
+  const fixedSeeds = [
+    'abc123', 'def456', 'ghi789', 'jkl012', 'mno345',
+    'pqr678', 'stu901', 'vwx234', 'yza567', 'bcd890',
+    'efg123', 'hij456', 'klm789', 'nop012', 'qrs345'
+  ]
+  const seed = fixedSeeds[index % fixedSeeds.length]
+  const timestamp = 'mgfpt69c' // Fixed timestamp for consistency
+  return `${prefix}-${seed}-${timestamp}`
 }
 
 function generatePatients() {
@@ -52,7 +60,7 @@ function generatePatients() {
   const lastObservedAt = randomPastMinutes(120)
   const activity = activities[idx % activities.length]
   const location = locations[(idx * 2) % locations.length]
-  const barcode = uid('DM') // unique 2D barcode string placeholder
+  const barcode = uid('DM', idx) // unique 2D barcode string with consistent index
   // Use randomuser portraits (headshots). Alternate men/women using index.
   const gender = idx % 2 === 0 ? 'men' : 'women'
   const avatarIndex = (idx * 7) % 99 // spread across 0..98
@@ -64,8 +72,13 @@ function generatePatients() {
 function initPatients() {
   const cached = loadFromStorage()
   if (cached && Array.isArray(cached) && cached.length) {
-    return cached
+    // Check if cached patients have consistent barcodes (all end with mgfpt69c)
+    const hasConsistentBarcodes = cached.every(p => p.barcode && p.barcode.endsWith('mgfpt69c'))
+    if (hasConsistentBarcodes) {
+      return cached
+    }
   }
+  // Generate new patients with consistent barcodes
   const generated = generatePatients()
   savePatients(generated)
   return generated

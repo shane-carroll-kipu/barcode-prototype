@@ -101,8 +101,7 @@ function handleCameraBarcodeDetected(barcode) {
     openModalFor(patient)
   } else {
     console.log('No patient found with barcode:', scanned)
-    // Show a temporary alert for debugging
-    alert(`Barcode scanned: "${scanned}"\nNo matching patient found.\nAvailable barcodes: ${patients.value.map(p => p.barcode).join(', ')}`)
+    // You could show a toast notification here instead of alert
   }
 }
 
