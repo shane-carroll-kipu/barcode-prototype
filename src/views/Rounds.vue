@@ -97,9 +97,12 @@ function handleCameraBarcodeDetected(barcode) {
   console.log('Found patient:', patient)
   
   if (patient) {
+    console.log('Opening modal for patient:', patient.name)
     openModalFor(patient)
   } else {
     console.log('No patient found with barcode:', scanned)
+    // Show a temporary alert for debugging
+    alert(`Barcode scanned: "${scanned}"\nNo matching patient found.\nAvailable barcodes: ${patients.value.map(p => p.barcode).join(', ')}`)
   }
 }
 
@@ -234,7 +237,6 @@ onBeforeUnmount(() => {
         <li>📷 <strong>Camera:</strong> Click "Start Camera Scan" above to scan patient barcodes with your device camera</li>
         <li>⌨️ <strong>Keyboard:</strong> Use a USB barcode scanner (auto-detects when you scan)</li>
         <li>🔄 <strong>Auto-Open:</strong> When a patient barcode is detected, the update modal will open automatically</li>
-        <li>🧪 <strong>Test Barcodes:</strong> Visit the <a href="/barcode-prototype/barcodes" target="_blank" style="color: #646cff;">Patient Barcodes page</a> to see QR codes you can scan for testing</li>
       </ul>
     </div>
 
