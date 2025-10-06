@@ -3,16 +3,20 @@
 
 <template>
   <main style="max-width: 800px; margin: 0 auto; padding: 2rem;">
-    <h1 style="margin-bottom: 1rem;">Barcode Scanning Prototypes</h1>
-    <p style="margin-bottom: 2rem; color: #666;">Choose an example to explore different implementations. These are placeholders for now.</p>
+    <h1 style="margin-bottom: 1rem;">Barcode Scanning App</h1>
+    <p style="margin-bottom: 2rem; color: #666;">Scan barcodes using your device camera or keyboard scanner. Both pages support GS1 DataMatrix and other barcode formats.</p>
 
     <nav style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem;">
-      <RouterLink to="/medication" class="card">Medication Input</RouterLink>
-      <RouterLink to="/rounds" class="card">Rounds</RouterLink>
-      <RouterLink to="/example1" class="card">Camera Scanner (Placeholder)</RouterLink>
-      <RouterLink to="/example2" class="card">Image Upload Scanner (Placeholder)</RouterLink>
-      <RouterLink to="/example3" class="card">Library-based Scanner (Placeholder)</RouterLink>
-      <RouterLink to="/example4" class="card">Manual Entry + Validation (Placeholder)</RouterLink>
+      <RouterLink to="/medication" class="card">
+        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💊</div>
+        <div style="font-weight: 600; margin-bottom: 0.25rem;">Medication Input</div>
+        <div style="font-size: 0.875rem; color: #6b7280;">Scan medication barcodes and auto-fill GS1 fields</div>
+      </RouterLink>
+      <RouterLink to="/rounds" class="card">
+        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🏥</div>
+        <div style="font-weight: 600; margin-bottom: 0.25rem;">Rounds</div>
+        <div style="font-size: 0.875rem; color: #6b7280;">Scan patient barcodes for rounds documentation</div>
+      </RouterLink>
     </nav>
   </main>
 </template>
@@ -20,17 +24,19 @@
 <style scoped>
 .card {
   display: block;
-  padding: 1rem 1.25rem;
+  padding: 1.5rem 1.25rem;
   border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  border-radius: 12px;
   background: #fff;
   color: #111827;
   text-decoration: none;
   transition: box-shadow .2s ease, transform .1s ease;
+  text-align: center;
 }
 .card:hover {
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+  border-color: #646cff;
 }
 </style>
 
