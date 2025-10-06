@@ -87,9 +87,19 @@ function handleCameraBarcodeDetected(barcode) {
   const scanned = normalizeScan(barcode)
   lastScanned.value = scanned
   const scannedLower = scanned.toLowerCase()
+  
+  // Debug: Log all patient barcodes for comparison
+  console.log('Available patient barcodes:', patients.value.map(p => p.barcode))
+  console.log('Scanned barcode (normalized):', scanned)
+  console.log('Scanned barcode (lowercase):', scannedLower)
+  
   const patient = patients.value.find(p => (p.barcode || '').toLowerCase() === scannedLower)
+  console.log('Found patient:', patient)
+  
   if (patient) {
     openModalFor(patient)
+  } else {
+    console.log('No patient found with barcode:', scanned)
   }
 }
 
@@ -224,6 +234,7 @@ onBeforeUnmount(() => {
         <li>📷 <strong>Camera:</strong> Click "Start Camera Scan" above to scan patient barcodes with your device camera</li>
         <li>⌨️ <strong>Keyboard:</strong> Use a USB barcode scanner (auto-detects when you scan)</li>
         <li>🔄 <strong>Auto-Open:</strong> When a patient barcode is detected, the update modal will open automatically</li>
+        <li>🧪 <strong>Test Barcodes:</strong> Visit the <a href="/barcode-prototype/barcodes" target="_blank" style="color: #646cff;">Patient Barcodes page</a> to see QR codes you can scan for testing</li>
       </ul>
     </div>
 
