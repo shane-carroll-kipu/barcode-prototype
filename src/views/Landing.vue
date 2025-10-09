@@ -17,6 +17,11 @@
         <div style="font-weight: 600; margin-bottom: 0.25rem;">Rounds</div>
         <div style="font-size: 0.875rem; color: #6b7280;">Scan patient barcodes for rounds documentation</div>
       </RouterLink>
+      <RouterLink to="/patient-search" class="card">
+        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">👥</div>
+        <div style="font-weight: 600; margin-bottom: 0.25rem;">Patient Search</div>
+        <div style="font-size: 0.875rem; color: #6b7280;">Search and view patient information</div>
+      </RouterLink>
     </nav>
   </main>
 </template>

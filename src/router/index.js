@@ -8,6 +8,7 @@ const routes = [
   { path: '/', name: 'Landing', component: Landing },
   { path: '/medication', name: 'MedicationInput', component: MedicationInput },
   { path: '/rounds', name: 'Rounds', component: Rounds },
+  { path: '/patient-search', name: 'PatientSearch', component: () => import('../views/PatientSearch.vue') },
   { path: '/barcodes', name: 'PatientBarcodes', component: PatientBarcodes },
   { path: '/example1', name: 'ExampleOne', component: () => import('../views/ExampleOne.vue') },
   { path: '/example2', name: 'ExampleTwo', component: () => import('../views/ExampleTwo.vue') },
