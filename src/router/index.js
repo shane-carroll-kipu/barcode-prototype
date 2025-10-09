@@ -2,13 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Landing from '../views/Landing.vue'
 import MedicationInput from '../views/MedicationInput.vue'
 import Rounds from '../views/Rounds.vue'
+import PatientSearch from '../views/PatientSearch.vue'
 import PatientBarcodes from '../views/PatientBarcodes.vue'
 
 const routes = [
   { path: '/', name: 'Landing', component: Landing },
   { path: '/medication', name: 'MedicationInput', component: MedicationInput },
   { path: '/rounds', name: 'Rounds', component: Rounds },
-  { path: '/patient-search', name: 'PatientSearch', component: () => import('../views/PatientSearch.vue') },
+  { path: '/patients', name: 'PatientSearch', component: PatientSearch },
   { path: '/barcodes', name: 'PatientBarcodes', component: PatientBarcodes },
   { path: '/example1', name: 'ExampleOne', component: () => import('../views/ExampleOne.vue') },
   { path: '/example2', name: 'ExampleTwo', component: () => import('../views/ExampleTwo.vue') },
