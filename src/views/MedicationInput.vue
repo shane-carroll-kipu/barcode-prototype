@@ -125,7 +125,7 @@ function handleScannerError(error) {
     </div>
 
     <div style="margin-top: 1.5rem;">
-      <RouterLink to="/">← Back to Landing</RouterLink>
+      <RouterLink to="/" class="back-button">← Back to Landing</RouterLink>
     </div>
   </main>
 </template>
@@ -148,6 +148,26 @@ input[type="text"]:focus {
   box-shadow: 0 0 0 3px rgba(100,108,255,0.15);
 }
 
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: #f3f4f6;
+  color: #374151;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: 1px solid #e5e7eb;
+}
+
+.back-button:hover {
+  background: #e5e7eb;
+  color: #111827;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
 @media (prefers-color-scheme: dark) {
   input[type="text"] {
     background: #374151;
@@ -157,6 +177,17 @@ input[type="text"]:focus {
   input[type="text"]:focus {
     border-color: #818cf8;
     box-shadow: 0 0 0 3px rgba(129,140,248,0.15);
+  }
+  
+  .back-button {
+    background: #374151;
+    color: #e5e7eb;
+    border-color: #4b5563;
+  }
+  .back-button:hover {
+    background: #4b5563;
+    color: #f9fafb;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
   }
 }
 </style>

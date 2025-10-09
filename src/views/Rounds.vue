@@ -226,7 +226,7 @@ onBeforeUnmount(() => {
     </div>
 
     <div style="margin-top: 1rem;">
-      <RouterLink to="/">← Back to Landing</RouterLink>
+      <RouterLink to="/" class="back-button">← Back to Landing</RouterLink>
       <span v-if="lastScanned" class="debug">Last scanned: {{ lastScanned }}</span>
     </div>
     
@@ -383,6 +383,39 @@ onBeforeUnmount(() => {
   }
 }
 .debug { margin-left: .75rem; color:#6b7280; font-size:.85rem; }
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: #f3f4f6;
+  color: #374151;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: 1px solid #e5e7eb;
+}
+
+.back-button:hover {
+  background: #e5e7eb;
+  color: #111827;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .back-button {
+    background: #374151;
+    color: #e5e7eb;
+    border-color: #4b5563;
+  }
+  .back-button:hover {
+    background: #4b5563;
+    color: #f9fafb;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+}
 </style>
 
 
